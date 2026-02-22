@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { useAuth } from "@/lib/auth-context";
 import { membersApi } from "@/lib/api";
 import { Member } from "@/lib/types";
@@ -20,6 +21,11 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
   const [error, setError] = useState("");
   const [members, setMembers] = useState<Member[]>([]);
   const [loadingMembers, setLoadingMembers] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (isOpen) {
@@ -45,7 +51,7 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
     onClose();
   }
 
-  if (!isOpen) return null;
+  if (!isOpen || !mounted) return null;
 
   function resetForm() {
     setName("");
@@ -89,8 +95,8 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
     }
   }
 
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
+  return createPortal(
+    <div className="fixed inset-0 z-[100] flex items-center justify-center">
       <div
         className="absolute inset-0 bg-black/50"
         onClick={onClose}
@@ -208,6 +214,7 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
           )}
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

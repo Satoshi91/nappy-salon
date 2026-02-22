@@ -1,36 +1,112 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Nappy Salon
 
-## Getting Started
+会員制サロンのコンテンツ管理システムです。ランクに応じたコンテンツのアクセス制御と会員管理機能を提供します。
 
-First, run the development server:
+## 機能
+
+### コンテンツ管理
+- コンテンツの作成・編集・削除
+- ランク別アクセス制御（Guest / Bronze / Silver / Gold）
+- カードビュー / リストビューの切り替え
+- サムネイル画像の表示
+
+### 会員管理
+- 会員の登録・編集・削除
+- ランク管理（Bronze / Silver / Gold）
+- 権限管理（管理者、コンテンツ管理）
+
+### 認証・認可
+- ユーザー切り替え機能
+- ランクに基づくコンテンツアクセス制御
+- 権限に基づく管理機能の制御
+
+## 技術スタック
+
+- **フレームワーク**: Next.js 16 (App Router)
+- **言語**: TypeScript
+- **スタイリング**: Tailwind CSS 4
+- **UIライブラリ**: React 19
+- **アイコン**: Lucide React
+
+## セットアップ
+
+### 前提条件
+
+- Node.js 18以上
+- npm / yarn / pnpm / bun
+
+### インストール
 
 ```bash
+# 依存関係のインストール
+npm install
+
+# 開発サーバーの起動
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+http://localhost:3000 でアプリケーションにアクセスできます。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 環境変数
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+`.env.local` ファイルを作成し、必要な環境変数を設定してください。
 
-## Learn More
+```env
+# APIエンドポイント
+NEXT_PUBLIC_API_URL=your_api_url
+```
 
-To learn more about Next.js, take a look at the following resources:
+## ディレクトリ構成
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+nappy-salon/
+├── app/                    # Next.js App Router
+│   ├── about/             # アバウトページ
+│   ├── contact/           # お問い合わせページ
+│   ├── contents/          # コンテンツ関連ページ
+│   │   ├── [id]/         # コンテンツ詳細・編集
+│   │   └── new/          # 新規コンテンツ作成
+│   ├── members/           # 会員関連ページ
+│   │   ├── [id]/         # 会員詳細
+│   │   └── new/          # 新規会員登録
+│   ├── layout.tsx         # ルートレイアウト
+│   ├── page.tsx           # トップページ
+│   └── globals.css        # グローバルスタイル
+├── components/            # 共通コンポーネント
+│   ├── AccessDeniedModal.tsx
+│   ├── Button.tsx
+│   ├── Card.tsx
+│   ├── LoginModal.tsx
+│   ├── Navigation.tsx
+│   ├── PermissionBadge.tsx
+│   ├── RankBadge.tsx
+│   └── UserSelector.tsx
+├── lib/                   # ユーティリティ・型定義
+│   ├── api.ts            # APIクライアント
+│   ├── auth-context.tsx  # 認証コンテキスト
+│   ├── rank-utils.ts     # ランク関連ユーティリティ
+│   └── types.ts          # TypeScript型定義
+└── scripts/              # スクリプト
+    ├── seed-contents.mjs # コンテンツシードデータ
+    └── seed-members.mjs  # 会員シードデータ
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## スクリプト
 
-## Deploy on Vercel
+```bash
+# 開発サーバー起動
+npm run dev
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# 本番ビルド
+npm run build
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# 本番サーバー起動
+npm start
+
+# リント実行
+npm run lint
+```
+
+## ライセンス
+
+Private

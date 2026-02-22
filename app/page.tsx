@@ -109,7 +109,7 @@ export default function HomePage() {
 
   return (
     <div>
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex flex-col gap-3 mb-6 md:flex-row md:justify-between md:items-center">
         <h1 className="text-2xl font-bold text-gray-900">
           コンテンツ一覧
         </h1>
@@ -259,18 +259,16 @@ export default function HomePage() {
                     )}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="text-lg font-semibold text-gray-900 truncate">
-                        {content.title}
-                      </span>
-                      <RankBadge rank={requiredRank} size="sm" />
-                    </div>
-                    <p className="text-sm text-gray-500 line-clamp-2 mt-1">
+                    <h3 className="text-lg font-semibold text-gray-900 truncate mb-1">
+                      {content.title}
+                    </h3>
+                    <p className="text-sm text-gray-500 line-clamp-2">
                       {content.body}
                     </p>
-                    <div className="flex items-center gap-4 mt-2 text-sm">
+                    <div className="flex items-center gap-3 mt-2 text-sm flex-wrap">
+                      <RankBadge rank={requiredRank} size="sm" />
                       {author && (
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-1.5">
                           <img
                             src={author.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(author.name)}&background=random&size=24`}
                             alt={author.name}
