@@ -1,11 +1,13 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { useAuth } from "@/lib/auth-context";
 import { RankBadge } from "./RankBadge";
 import { LoginModal } from "./LoginModal";
 
 export function UserSelector() {
+  const router = useRouter();
   const { currentUser, logout } = useAuth();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -68,6 +70,7 @@ export function UserSelector() {
             onClick={() => {
               logout();
               setIsDropdownOpen(false);
+              router.push("/");
             }}
             className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors"
           >

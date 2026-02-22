@@ -104,9 +104,23 @@ export default function ContentDetailPage() {
               {content.title}
             </h1>
             {canManageContent && (
-              <Link href={`/contents/${content.id}/edit`}>
-                <Button size="sm">編集</Button>
-              </Link>
+              <div className="flex items-center gap-2">
+                <Link href={`/contents/${content.id}/edit`}>
+                  <Button size="sm">
+                    <Pencil className="w-4 h-4 mr-1" />
+                    編集
+                  </Button>
+                </Link>
+                <Button
+                  size="sm"
+                  variant="danger"
+                  onClick={handleDelete}
+                  disabled={deleting}
+                >
+                  <Trash2 className="w-4 h-4 mr-1" />
+                  {deleting ? "削除中..." : "削除"}
+                </Button>
+              </div>
             )}
           </div>
 

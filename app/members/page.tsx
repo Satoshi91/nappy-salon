@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Member, Rank } from "@/lib/types";
 import { membersApi } from "@/lib/api";
 import { Card, CardContent, Button, RankBadge, PermissionBadge } from "@/components";
+import { Pencil, Trash2 } from "lucide-react";
 
 const RANK_OPTIONS: { value: Rank; label: string }[] = [
   { value: "bronze", label: "ブロンズ" },
@@ -172,17 +173,20 @@ export default function MembersPage() {
                 </div>
                 <div className="flex gap-2">
                   <Link href={`/members/${member.id}`}>
-                    <Button variant="secondary" size="sm">
-                      編集
-                    </Button>
+                    <button
+                      className="p-2 text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-colors"
+                      title="編集"
+                    >
+                      <Pencil className="w-5 h-5" />
+                    </button>
                   </Link>
-                  <Button
-                    variant="danger"
-                    size="sm"
+                  <button
+                    className="p-2 text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-md transition-colors"
+                    title="削除"
                     onClick={() => handleDelete(member.id)}
                   >
-                    削除
-                  </Button>
+                    <Trash2 className="w-5 h-5" />
+                  </button>
                 </div>
               </CardContent>
             </Card>
